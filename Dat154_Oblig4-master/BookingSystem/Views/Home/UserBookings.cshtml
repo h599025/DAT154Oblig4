@@ -1,0 +1,19 @@
+﻿@model BookingSystem.Models.Customer
+
+<div class="container">
+    <div class="row justify-content-around">
+        <p> Dine bookinger: </p>
+        @foreach (Booking booking in @Model.Bookings)
+        {
+            <div class="card col-sm-3" style="width: 18rem;">
+                <img class="card-img-top" src="https://flightitineraryforvisa.com/wp-content/uploads/2018/12/Hotel-Booking-1280x720.jpg" alt="Default hotel room image">
+
+                <div class="card-body">
+                    <h5 class="card-title">Room number @booking.Roomnr </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Dates: @booking.Checkindate.Date - @booking.Checkoutdate.Date</h6>
+                    @* <input type="submit" class="btn btn-primary" value="Cancel Booking /> *@
+                </div>
+            </div>
+        }
+    </div>
+</div>

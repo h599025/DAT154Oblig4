@@ -1,0 +1,36 @@
+﻿<Window x:Class="CleaningSystem.Tasks"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CleaningSystem"
+        mc:Ignorable="d"
+        Title="Tasks" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Tasks" FontSize="25" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="40" Width="68"/>
+        <Button Content="Sign Out" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="SignOut" Height="40" Width="90"/>
+        <ListView Name="Service" ItemsSource="{Binding}" Margin="0,68,0,0">
+            <ListView.Resources>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+
+                <GridView>
+                    <GridViewColumn Header="Room nr." DisplayMemberBinding="{Binding Path=Roomnr}" Width="100"/>
+                    <GridViewColumn Header="Checked in" DisplayMemberBinding="{Binding Path=Checkedin}" Width="100"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Path=Description}" Width="300"/>
+                    <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Path=Note}" Width="150"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}" Width="150"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Refresh" FontSize ="13" HorizontalAlignment="Left" Margin="655,10,0,0" VerticalAlignment="Top" Height="40" Width="81" Click="Button_Click"/>
+    </Grid>
+</Window>

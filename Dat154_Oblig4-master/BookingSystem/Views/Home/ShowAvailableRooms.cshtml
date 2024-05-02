@@ -1,0 +1,43 @@
+﻿@model BookingSystem.Models.AvailableRooms
+
+<div class="container">
+    <div class="row justify-content-around">
+
+        @foreach (Room room in Model.rooms)
+        {
+
+            <div class="card col-sm-3" style="width: 18rem;">
+                @switch (room.Size)
+                {
+                    case RoomSize.small:
+                        <img class="card-img-top" src="https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_16:9/at%2F4._Image_via_Public_Hotels" alt="Small hotel room image">
+                        break;
+                    case RoomSize.medium:
+                        <img class="card-img-top" src="https://www.acappellasuitehotel.com/wp-content/uploads/2015/05/Standard-Twin-Bedroom-Medium.jpg" alt="Medium hotel room image">
+                        break;
+                    case RoomSize.large:
+                        <img class="card-img-top" src="https://purewows3.imgix.net/images/articles/2019_08/Grand_Velas.jpeg?auto=format,compress&cs=strip" alt="Large hotel room image">
+                        break;
+                    default:
+                        <img class="card-img-top" src="https://media.istockphoto.com/photos/interior-of-a-modern-luxury-hotel-double-bed-bedroom-picture-id1163498940?k=20&m=1163498940&s=612x612&w=0&h=tUPidNW2ny095sCR97dur7cbrCnYpcjHbevUTJyB8Jc=" alt="Default hotel room image">
+                        break;
+                }
+                <div class="card-body">
+                    <h5 class="card-title">Room number @room.Roomnr </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Number of beds: @room.Beds </h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Roomsize: @room.Size</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Price per night: @room.Price</h6>
+
+                    <form method="post" asp-action="BookRoom" asp-controller="home">
+                        <input type="hidden" name="roomNr" asp-for=roomNr value="@room.Roomnr" />
+                        <input type="hidden" name="checkIn" asp-for=CheckIn value="@Model.CheckIn" />
+                        <input type="hidden" name="checkOut" asp-for=CheckOut value="@Model.CheckOut" />
+
+                        <input type="submit" class="btn btn-primary" value="Book room" />
+                    </form>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

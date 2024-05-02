@@ -1,0 +1,77 @@
+﻿<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+@model BookingSystem.Models.BookingRequest
+
+
+﻿<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+
+            <form asp-action="ShowAvailableRooms" asp-controller="home">
+
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+
+                    <div class="text-center text-lg-start mb-3">
+                        <p class="small fw-bold mt-2 pt-1 mb-0"> Choose desired dates</p>
+                    </div>
+
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control daterange" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+
+                    <input type="hidden" id="startdate" asp-for="CheckIn" value="" />
+                    <input type="hidden" id="enddate" asp-for="CheckOut" value="" />
+
+                    <div class="text-center text-lg-start mb-3">
+                        <p class="small fw-bold mt-2 pt-1 mb-0"> ..And how many beds</p>
+                    </div>
+
+
+                    <select class="form-select form-select-lg mb-3 size-3" asp-for="NumberOfBeds">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                    </select>
+
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-lg">Search for rooms</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://danielvoelk.de/wp-content/uploads/ManyPixels-unDraw-Alternative.svg"
+                     class="img-fluid" alt="Calendar">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+
+    let start_date;
+    let end_date;
+
+    $('.daterange').daterangepicker({
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(48, 'hour'),
+        minDate: moment().startOf('hour'),
+        autoApply: true,
+        locale: {
+          format: 'DD/MM/YY'
+        }
+
+    }, function(start, end, label) {
+        $("#startdate").val(start.format('DD-MM-YYYY'));
+        $("#enddate").val(end.format('DD-MM-YYYY'));
+      });
+
+
+</script>
